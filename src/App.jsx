@@ -5,10 +5,10 @@ import Navbar from './Components/Shared/Navbar'
 function App() {
 
   return (
-    <>
+    <div className=''>
       <Navbar></Navbar>
       <Outlet></Outlet>
-    </>
+    </div>
   )
 }
 

@@ -1,0 +1,14 @@
+.carousel .slide img {
+    max-height: 500px;  /* change this to whatever you want */
+    width: 100%;
+}
+.thumbs-wrapper{
+    
+    text-align: center;
+}
+
+.thumbs-wrapper >ul>li{
+    box-shadow: 2px 2px;
+    border-radius: 10%;
+
+}
