@@ -5,7 +5,11 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import DefaultErrorPage from './Components/Errors/DefaultErrorPage.jsx'
 import Home from './Components/Home/Home.jsx'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import DataProvider from './Components/Providers/DataProvider.jsx'
 
+
+const queryClient = new QueryClient()
 const router = createBrowserRouter([
   {
     path: '/',
@@ -21,8 +25,12 @@ const router = createBrowserRouter([
 ])
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+    <QueryClientProvider client={queryClient}>
+      <DataProvider>
+        <RouterProvider router={router}>
+          <App />
+        </RouterProvider>
+      </DataProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
 )

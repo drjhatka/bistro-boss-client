@@ -1,0 +1,12 @@
+.thumbs-wrapper{
+    margin: auto !important;
+    padding-top: 10px;
+}
+.slide{
+    max-height: 450px;
+}
+.slide img{
+    border-radius: 10px !important;
+    width: 100%;
+    object-fit: contain;
+}
