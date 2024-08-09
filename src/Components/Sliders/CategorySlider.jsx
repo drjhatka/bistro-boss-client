@@ -1,10 +1,11 @@
+import { useContext } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import menuImg1 from '../../assets/menu/dessert-bg.jpeg'
-import menuImg2 from '../../assets/menu/pizza-bg.jpg'
-import menuImg3 from '../../assets/menu/salad-bg.jpg'
-import menuImg4 from '../../assets/menu/soup-bg.jpg'
+import { DataContext } from '../Providers/DataProvider';
+
 const CategorySlider = () => {
+    const { menuData } = useContext(DataContext)
+
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -26,7 +27,7 @@ const CategorySlider = () => {
     };
     return (
         <Carousel 
-            swipeable={false}
+            swipeable={true}
             draggable={false}
             showDots={true}
             responsive={responsive}
@@ -44,10 +45,17 @@ const CategorySlider = () => {
             itemClass="carousel-item-padding-40-px"
             
         >
-            <div><img className='w-70' src={menuImg1} alt="" /></div>
-            <div><img className='w-70' src={menuImg2} alt="" /></div>
-            <div><img className='w-70' src={menuImg3} alt="" /></div>
-            <div><img className='w-70' src={menuImg4} alt="" /></div>
+            {
+                menuData.slice(0,4).map((menu, index)=>{
+                    return <div style={{position:'relative'}} key={'Category-'+index}>
+                            <img  src={menu.image} alt="" /> 
+                                <p className='absolute bottom-5 bg-black text-white font-bold lg:left-[50%] px-5 py-2 rounded'>
+                                    {menu.category}
+                                </p>
+                            </div>
+
+                })
+            }
         </Carousel>
     )
 
