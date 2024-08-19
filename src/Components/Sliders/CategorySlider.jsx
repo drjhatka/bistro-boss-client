@@ -4,7 +4,7 @@ import 'react-multi-carousel/lib/styles.css';
 import { DataContext } from '../Providers/DataProvider';
 
 const CategorySlider = () => {
-    const { menuData } = useContext(DataContext)
+    const { data, isLoading } = useContext(DataContext)
 
     const responsive = {
         superLargeDesktop: {
@@ -46,7 +46,7 @@ const CategorySlider = () => {
             
         >
             {
-                menuData.slice(0,4).map((menu, index)=>{
+                !isLoading && data.slice(0,4).map((menu, index)=>{
                     return <div style={{position:'relative'}} key={'Category-'+index}>
                             <img  src={menu.image} alt="" /> 
                                 <p className='absolute bottom-5 bg-black text-white font-bold lg:left-[50%] px-5 py-2 rounded'>

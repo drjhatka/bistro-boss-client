@@ -7,12 +7,13 @@ import SectionButton from '../Shared/SectionButton';
 import MenuByCategory from './MenuByCategory';
 
 const OurMenu = () => {
-    const { menuData } = useContext(DataContext)
-    const dessertData = menuData.filter((menu) => menu.category == 'dessert').slice(0,6)
-    const saladData = menuData.filter((menu) => menu.category == 'salad').slice(0,6)
-    const soupData = menuData.filter((menu) => menu.category == 'soup').slice(0,6)
-    const pizzaData = menuData.filter((menu) => menu.category == 'pizza').slice(0,6)
-    console.log('Des-> ',dessertData)
+    const { data, isLoading } = useContext(DataContext)
+    
+    const dessertData   = !isLoading &&  data.filter((menu) => menu.category == 'dessert').slice(0,6)
+    const saladData     = !isLoading &&  data.filter((menu) => menu.category == 'salad').slice(0,6)
+    const soupData      = !isLoading &&  data.filter((menu) => menu.category == 'soup').slice(0,6)
+    const pizzaData     = !isLoading &&  data.filter((menu) => menu.category == 'pizza').slice(0,6)
+    
     return (
         <div className='max-w-[80%] mx-auto'>
             <div>
@@ -23,7 +24,7 @@ const OurMenu = () => {
             </div>
             <div className='grid md:grid-cols-2 mb-4 gap-4'>
                 {
-                    menuData.slice(0, 6).map((menu, index) => {
+                    !isLoading && data.slice(0, 6).map((menu, index) => {
                         return <MenuCard key={'MenuCard-' + index} image={menu.image} title={menu.name} price={menu.price} details={menu.recipe}></MenuCard>
                     })
                 }
@@ -36,8 +37,7 @@ const OurMenu = () => {
             <MenuByCategory menuData={soupData} ></MenuByCategory>
             <MenuByCategory menuData={pizzaData} ></MenuByCategory>
         </div>
-
     );
-};
+}
 
 export default OurMenu;

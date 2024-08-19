@@ -8,6 +8,7 @@ import Home from './Components/Home/Home.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import DataProvider from './Components/Providers/DataProvider.jsx'
 import OurMenu from './Components/OurMenu/OurMenu.jsx'
+import OurShop from './Components/OurShop/OurShop.jsx'
 
 
 const queryClient = new QueryClient()
@@ -23,7 +24,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/our-menu',
-        element: <OurMenu></OurMenu>
+        element: <OurMenu/>
+      },
+      {
+        path: '/our-shop',
+        element: <OurShop/>
       }
     ]
   }

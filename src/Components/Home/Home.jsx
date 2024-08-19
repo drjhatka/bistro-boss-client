@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomTitle from '../Titles/CustomTitle';
 
 const Home = () => {
-    const { menuData } = useContext(DataContext)
+    const { data, isLoading } = useContext(DataContext)
     const navigate = useNavigate()
 
     return (
@@ -41,14 +41,14 @@ const Home = () => {
             </div>
             <div className='grid lg:grid-cols-2 lg:gap-4 py-4'>
                 {
-                    menuData.slice(0, 6).map((menu, index) => {
+                    !isLoading && data.slice(0, 6).map((menu, index) => {
                         return <MenuCard key={'MenuCard-' + index} image={menu.image} title={menu.name} price={menu.price} details={menu.recipe}></MenuCard>
                     })
                 }
 
             </div>
             <div className='text-center py-4'>
-                <SectionButton clickHandler={()=>{navigate('/our-menu')}} text={'View Full Menu'.toUpperCase()}></SectionButton>
+                <SectionButton clickHandler={() => { navigate('/our-menu') }} text={'View Full Menu'.toUpperCase()}></SectionButton>
 
             </div>
             <div>
@@ -59,7 +59,7 @@ const Home = () => {
             </div>
             <div className='grid md:grid-cols-2 lg:grid-cols-3 lg:gap-5'>
                 {
-                    menuData.slice(0, 6).map((menu, index) => {
+                    !isLoading && data.slice(0, 6).map((menu, index) => {
                         return <ItemCard menu={menu} key={'ItemCard-' + index} ></ItemCard>
                     })
                 }

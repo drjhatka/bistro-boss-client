@@ -47,8 +47,8 @@ const Navbar = () => {
                     <li><Link to='/'>Home</Link></li>
                     <li><Link to='/'>Contact Us</Link></li>
                     <li><Link to='/'>Dashboard</Link></li>
-                    <li><Link to='/'>Our Menu</Link></li>
-                    <li><Link to='/'>Our Shop</Link></li>
+                    <li><Link to='/our-menu'>Our Menu</Link></li>
+                    <li><Link to='/our-shop'>Our Shop</Link></li>
                 </ul>
                 <div className="dropdown dropdown-end">
                     <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
