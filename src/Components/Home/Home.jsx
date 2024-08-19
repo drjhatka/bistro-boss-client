@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Slider from '../Sliders/BannerSlider';
 import SectionTitle from '../Shared/SectionTitle';
 import CategorySlider from '../Sliders/CategorySlider';
@@ -8,10 +8,15 @@ import SectionButton from '../Shared/SectionButton';
 import StandAloneBanner from '../Shared/StandAloneBanner';
 import ItemCard from '../Shared/ItemCard';
 import BannerSlider from '../Sliders/BannerSlider';
+import { DataContext } from '../Providers/DataProvider';
+import Featured from './Featured';
+import Testimonials from './Testimonials';
+import { useNavigate } from 'react-router-dom';
+import CustomTitle from '../Titles/CustomTitle';
 
 const Home = () => {
-    const menuData = {}
-
+    const { menuData } = useContext(DataContext)
+    const navigate = useNavigate()
 
     return (
         <div className=' w-[90%] mx-auto'>
@@ -26,16 +31,24 @@ const Home = () => {
             <div className='min-h-56'>
                 <CategorySlider></CategorySlider>
             </div>
-            <div className='bg-emerald-500'>
-                <Title text={'Bistro Boss'} subtext={'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse, veritatis aut? Perferendis dolores culpa nobis asperiores omnis, neque delectus iusto facere quisquam, ullam mollitia eaque vel sit officiis quasi provident?'} transparent={true}></Title>
-            
+            <div className="flex mt-4 items-center bg-[url('chef-service.jpg')] bg-cover min-h-96">
+                <Title className='text-black' text={'Bistro Boss'} subtext={`Lorem ipsum dolor sit, amet consectetur adipisicing elit. Esse, veritatis aut? 
+                    Perferendis dolores culpa nobis asperiores omnis, neque delectus iusto facere quisquam, ullam mollitia eaque vel sit officiis quasi provident?`} transparent={false}></Title>
+
+            </div>
+            <div>
+                <SectionTitle heading={'FROM OUR MENU'} subheading={'---check it out---'} />
             </div>
             <div className='grid lg:grid-cols-2 lg:gap-4 py-4'>
-                <MenuCard title={'Salad and best dishes!'} price={90} details={'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores, est. Numquam odit, nemo repellat commodi velit necessitatibus veniam consequuntur, consequatur officiis doloribus alias nam sit unde, explicabo laborum iste beatae!'}></MenuCard>
-                <MenuCard title={'Salad and best dishes!'} price={90} details={'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Maiores, est. Numquam odit, nemo repellat commodi velit necessitatibus veniam consequuntur, consequatur officiis doloribus alias nam sit unde, explicabo laborum iste beatae!'}></MenuCard>
+                {
+                    menuData.slice(0, 6).map((menu, index) => {
+                        return <MenuCard key={'MenuCard-' + index} image={menu.image} title={menu.name} price={menu.price} details={menu.recipe}></MenuCard>
+                    })
+                }
+
             </div>
             <div className='text-center py-4'>
-            <SectionButton text={'View Full Menu'.toUpperCase()}></SectionButton>
+                <SectionButton clickHandler={()=>{navigate('/our-menu')}} text={'View Full Menu'.toUpperCase()}></SectionButton>
 
             </div>
             <div>
@@ -45,10 +58,17 @@ const Home = () => {
                 <SectionTitle subheading={'Should Try'} heading={'CHEF RECCOMENDS'} ></SectionTitle>
             </div>
             <div className='grid md:grid-cols-2 lg:grid-cols-3 lg:gap-5'>
-                <ItemCard  ></ItemCard>
-                <ItemCard  ></ItemCard>
-                <ItemCard  ></ItemCard>
-                <ItemCard  ></ItemCard>
+                {
+                    menuData.slice(0, 6).map((menu, index) => {
+                        return <ItemCard menu={menu} key={'ItemCard-' + index} ></ItemCard>
+                    })
+                }
+            </div>
+            <div className='py-4'>
+                <Featured></Featured>
+            </div>
+            <div>
+                <Testimonials></Testimonials>
             </div>
         </div>
     );

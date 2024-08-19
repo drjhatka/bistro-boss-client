@@ -7,6 +7,7 @@ import DefaultErrorPage from './Components/Errors/DefaultErrorPage.jsx'
 import Home from './Components/Home/Home.jsx'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import DataProvider from './Components/Providers/DataProvider.jsx'
+import OurMenu from './Components/OurMenu/OurMenu.jsx'
 
 
 const queryClient = new QueryClient()
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>
+      },
+      {
+        path: '/our-menu',
+        element: <OurMenu></OurMenu>
       }
     ]
   }
